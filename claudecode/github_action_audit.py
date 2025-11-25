@@ -224,7 +224,8 @@ class SimpleClaudeRunner:
             cmd = [
                 'claude',
                 '--output-format', 'json',
-                '--model', DEFAULT_CLAUDE_MODEL
+                '--model', DEFAULT_CLAUDE_MODEL,
+                '--disallowed-tools', 'Bash(ps:*)'
             ]
             
             # Run Claude Code with retry logic

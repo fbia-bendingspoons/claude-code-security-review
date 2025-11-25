@@ -166,7 +166,8 @@ class TestSimpleClaudeRunner:
         assert call_args[0][0] == [
             'claude',
             '--output-format', 'json',
-            '--model', DEFAULT_CLAUDE_MODEL
+            '--model', DEFAULT_CLAUDE_MODEL,
+            '--disallowed-tools', 'Bash(ps:*)'
         ]
         assert call_args[1]['input'] == 'test prompt'
         assert call_args[1]['cwd'] == Path('/tmp/test')
