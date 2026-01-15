@@ -161,6 +161,13 @@ cd claude-code-security-review
 pytest claudecode -v
 ```
 
+## Troubleshooting
+
+Having issues? Check the [Troubleshooting Guide](docs/troubleshooting.md) for solutions to common problems, including:
+- macOS "Trace/BPT trap" installation errors
+- PATH configuration issues
+- API key and authentication problems
+
 ## Support
 
 For issues or questions:
