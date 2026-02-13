@@ -54,6 +54,9 @@ Files modified:
 OBJECTIVE:
 Perform a security-focused code review to identify HIGH-CONFIDENCE security vulnerabilities that could have real exploitation potential. This is not a general code review - focus ONLY on security implications newly added by this PR. Do not comment on existing security concerns.
 
+DIFF DIRECTION — CRITICAL:
+In the unified diff, lines starting with `-` are OLD code being REMOVED and lines starting with `+` are NEW code being ADDED by this PR. You must ONLY report vulnerabilities present in the `+` (added) lines — the new code the PR introduces. Do NOT report vulnerabilities that exist only in the `-` (removed) lines, as those are being deleted by this PR. If a PR is fixing a vulnerability (removing insecure code and adding secure code), that is NOT a finding — do not flag it.
+
 CRITICAL INSTRUCTIONS:
 1. MINIMIZE FALSE POSITIVES: Only flag issues where you're >80% confident of actual exploitability
 2. AVOID NOISE: Skip theoretical issues, style concerns, or low-impact findings
