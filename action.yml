@@ -48,6 +48,11 @@ inputs:
     required: false
     default: ''
 
+  path-to-claude-code-executable:
+    description: 'Path to a pre-installed Claude Code executable. When provided, skips the npm install of @anthropic-ai/claude-code and uses this binary instead.'
+    required: false
+    default: ''
+
 outputs:
   findings-count:
     description: 'Number of security findings'
@@ -164,11 +169,17 @@ runs:
       shell: bash
       env:
         ACTION_PATH: ${{ github.action_path }}
+        PATH_TO_CLAUDE_CODE_EXECUTABLE: ${{ inputs.path-to-claude-code-executable }}
       run: |
         echo "::group::Install Deps"
         if [ "${{ steps.claudecode-check.outputs.enable_claudecode }}" == "true" ]; then
           pip install -r "$ACTION_PATH/claudecode/requirements.txt"
-          npm install -g @anthropic-ai/claude-code
+          if [ -n "$PATH_TO_CLAUDE_CODE_EXECUTABLE" ]; then
+            echo "Using pre-installed Claude Code: $PATH_TO_CLAUDE_CODE_EXECUTABLE"
+            echo "$(dirname "$PATH_TO_CLAUDE_CODE_EXECUTABLE")" >> "$GITHUB_PATH"
+          else
+            npm install -g @anthropic-ai/claude-code
+          fi
         fi
         sudo apt-get update && sudo apt-get install -y jq
         echo "::endgroup::"
